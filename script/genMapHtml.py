@@ -8,15 +8,42 @@ def makeMapFile(arg_number_of_row, arg_number_of_col):
     print("makeMapFile")
     numberOfRow = int(arg_number_of_row)
     numberOfCol = int(arg_number_of_col)
+
     if((numberOfRow <= 0) or (numberOfCol <= 0)):
         print("Invalid Value of Argument. Expected Vaule is morae than 0")
         return
+    indexFilePath = './index.html'
+    indexFile = open(indexFilePath, 'w')
+    textForIndexFile = [
+        "<!DOCTYPE html>\n",
+        "<html lang=\"ja\">\n",
+        "<head>\n",
+        "\t<meta charset=\"UTF-8\">\n",
+        "\t<title>水中MAP⭐️</title>\n",
+        "\t<link rel=\"stylesheet\" href=\"style.css\">\n",
+        "</head>\n",
+        "<body>\n",
+        "<h1>水中MAP⭐️</h1>\n",
+        "<table border=\"1\">\n",
+    #   table elements will be inserted at later step. tableElementIndex:10 is reserved  
+        "</table>\n",
+        "</body>",
+        "</html>"
+    ]
+    indexFile.writelines(textForIndexFile)
+    indexFile.close()
+    indexFile = open(indexFilePath,'r')
+    indexFileLines = indexFile.readlines() 
+    indexFile.close()
+    tableElementIndex = 10
     for j in range(numberOfCol):
+        indexFileLines.insert(tableElementIndex, '\t<tr>\n')
+        tableElementIndex = tableElementIndex+1
         for i in range(numberOfRow):
-            print('%d\t%d' % (i,j))
-            path = './' + str(i) + str(j)+ '.html'
-            file = open(path, 'w')
-            text = [
+            print('%d\t%d' % (j,i))
+            mapFilePath = './' + str(j) + str(i)+ '.html'
+            mapFile = open(mapFilePath, 'w')
+            textForMap = [
                 "<!DOCTYPE html>\n",
                 "<html lang=\"ja\">\n",
                 "<head>\n",
@@ -37,8 +64,18 @@ def makeMapFile(arg_number_of_row, arg_number_of_col):
                 "</body>"
             ]
             titleIndex = 5
-            text.insert(titleIndex, '\t<title>大瀬崎湾内mapNo:%d-%d</title>\n' %(i,j))
-            file.writelines(text)
+            textForMap.insert(titleIndex, '\t<title>mapNo:%d-%d</title>\n' %(j,i))
+            mapFile.writelines(textForMap)
+            mapFile.close()
+            indexFileLines.insert(tableElementIndex, '\t\t<td><a href=\"%d%d.html\"></a></td>\n' % (j,i))
+            tableElementIndex = tableElementIndex + 1
+        indexFileLines.insert(tableElementIndex, '\t</tr>\n')
+        tableElementIndex = tableElementIndex + 1
+    indexFileLines.insert(tableElementIndex, '</table>\n')
+
+    indexFile = open(indexFilePath, 'w')
+    indexFile.writelines(indexFileLines)
+    indexFile.close()
     return
 
 def main():
