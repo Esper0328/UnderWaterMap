@@ -7,6 +7,7 @@ import sys
 class MapPage:
     def __init__(self):
         self.indexFilePath = '../index.html'
+        self.styleCssPath = '../style.css'
         self.textForIndexFile = [
             "<!DOCTYPE html>\n",
             "<html lang=\"ja\">\n",
@@ -18,7 +19,7 @@ class MapPage:
             "<body>\n",
             "<h1>水中MAP⭐️</h1>\n",
             "<table border=\"1\">\n",
-#   table elements will be inserted at later step. tableElementIndex:10 is reserved  
+#           table elements will be inserted at later step. tableElementIndex:10 is reserved  
             "</table>\n",
             "</body>",
             "</html>"
@@ -43,9 +44,29 @@ class MapPage:
             "<a href=\"index.html\">Back to Top</a>\n",
             "</body>"
         ]
+        self.textForStyleCss = [
+            "@charset \"UTF-8\";\n",
+            "body {\n",
+            "\tbackground-image: url(\"underwatermap.png\");\n",
+            "\tbackground-size: cover;\n",
+            "}\n\n",
+            "table {\n",
+            "\tborder-collapse: collapse;\n",
+            "\ttable-layout: auto;\n",
+            "\twidth: 100vw;\n",
+            "\theight: 100vh;\n",
+            "}\n\n",
+            "th, td a{\n",
+            "\tdisplay:block;\n",
+            "\twidth:100%;\n",
+            "\theight:100%;\n",
+            "}\n\n",
+            "th, td a:hover{\n",
+            "\tbackground:rgba(0, 255, 0, 0.2)\n",
+            "}\n"
+        ]
 
     def create(self, arg_number_of_row, arg_number_of_col):
-        print("makeMapFile")
         numberOfRow = int(arg_number_of_row)
         numberOfCol = int(arg_number_of_col)
 
@@ -74,6 +95,8 @@ class MapPage:
         indexFileLines.insert(tableElementIndex, '</table>\n')
         with open(self.indexFilePath, 'w') as indexFile:
             indexFile.writelines(indexFileLines)
+        with open(self.styleCssPath, 'w') as styleCssFile:
+            styleCssFile.writelines(self.textForStyleCss)
         return
 
 def main():
