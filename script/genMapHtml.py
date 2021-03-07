@@ -21,6 +21,7 @@ def makeMapFile(arg_number_of_row, arg_number_of_col):
                 "<html lang=\"ja\">\n",
                 "<head>\n",
                 "\t<meta charset=\"UTF-8\">\n",
+#               title will be inserted at later step. titleIndex:5 is reserved  
                 "\t<link rel=\"stylesheet\" href=\"area.css\">\n",
                 "</head>\n",
                 "<body>\n",
