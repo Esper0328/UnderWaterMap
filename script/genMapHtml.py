@@ -88,6 +88,7 @@ class MapPage:
                     titleIndex = 5
                     self.textForMap.insert(titleIndex, '\t<title>mapNo:%d-%d</title>\n' %(j,i))
                     mapFile.writelines(self.textForMap)
+                    self.textForMap.pop(titleIndex)
                 indexFileLines.insert(tableElementIndex, '\t\t<td><a href=\"%d%d.html\"></a></td>\n' % (j,i))
                 tableElementIndex += 1
             indexFileLines.insert(tableElementIndex, '\t</tr>\n')
