@@ -6,7 +6,7 @@ import sys
 
 class MapPage:
     def __init__(self):
-        self.indexFilePath = './index.html'
+        self.indexFilePath = '../index.html'
         self.textForIndexFile = [
             "<!DOCTYPE html>\n",
             "<html lang=\"ja\">\n",
@@ -62,7 +62,7 @@ class MapPage:
             tableElementIndex += 1
             for i in range(numberOfRow):
                 print('%d\t%d' % (j,i))
-                mapFilePath = './' + str(j) + str(i)+ '.html'
+                mapFilePath = '../' + str(j) + str(i)+ '.html'
                 with open(mapFilePath, 'w') as mapFile:
                     titleIndex = 5
                     self.textForMap.insert(titleIndex, '\t<title>mapNo:%d-%d</title>\n' %(j,i))
