@@ -38,7 +38,7 @@ def makeMapFile(arg_number_of_row, arg_number_of_col):
     tableElementIndex = 10
     for j in range(numberOfCol):
         indexFileLines.insert(tableElementIndex, '\t<tr>\n')
-        tableElementIndex = tableElementIndex+1
+        tableElementIndex += 1
         for i in range(numberOfRow):
             print('%d\t%d' % (j,i))
             mapFilePath = './' + str(j) + str(i)+ '.html'
@@ -68,9 +68,9 @@ def makeMapFile(arg_number_of_row, arg_number_of_col):
             mapFile.writelines(textForMap)
             mapFile.close()
             indexFileLines.insert(tableElementIndex, '\t\t<td><a href=\"%d%d.html\"></a></td>\n' % (j,i))
-            tableElementIndex = tableElementIndex + 1
+            tableElementIndex += 1
         indexFileLines.insert(tableElementIndex, '\t</tr>\n')
-        tableElementIndex = tableElementIndex + 1
+        tableElementIndex += 1
     indexFileLines.insert(tableElementIndex, '</table>\n')
 
     indexFile = open(indexFilePath, 'w')
