@@ -52,12 +52,10 @@ class MapPage:
         if((numberOfRow <= 0) or (numberOfCol <= 0)):
             print("Invalid Value of Argument. Expected Vaule is morae than 0")
             return
-        indexFile = open(self.indexFilePath, 'w')
-        indexFile.writelines(self.textForIndexFile)
-        indexFile.close()
-        indexFile = open(self.indexFilePath,'r')
-        indexFileLines = indexFile.readlines() 
-        indexFile.close()
+        with open(self.indexFilePath, 'w') as indexFile:
+            indexFile.writelines(self.textForIndexFile)
+        with open(self.indexFilePath, 'r') as indexFile:
+            indexFileLines = indexFile.readlines()
         tableElementIndex = 10
         for j in range(numberOfCol):
             indexFileLines.insert(tableElementIndex, '\t<tr>\n')
@@ -65,19 +63,17 @@ class MapPage:
             for i in range(numberOfRow):
                 print('%d\t%d' % (j,i))
                 mapFilePath = './' + str(j) + str(i)+ '.html'
-                mapFile = open(mapFilePath, 'w')
-                titleIndex = 5
-                self.textForMap.insert(titleIndex, '\t<title>mapNo:%d-%d</title>\n' %(j,i))
-                mapFile.writelines(self.textForMap)
-                mapFile.close()
+                with open(mapFilePath, 'w') as mapFile:
+                    titleIndex = 5
+                    self.textForMap.insert(titleIndex, '\t<title>mapNo:%d-%d</title>\n' %(j,i))
+                    mapFile.writelines(self.textForMap)
                 indexFileLines.insert(tableElementIndex, '\t\t<td><a href=\"%d%d.html\"></a></td>\n' % (j,i))
                 tableElementIndex += 1
             indexFileLines.insert(tableElementIndex, '\t</tr>\n')
             tableElementIndex += 1
         indexFileLines.insert(tableElementIndex, '</table>\n')
-        indexFile = open(self.indexFilePath, 'w')
-        indexFile.writelines(indexFileLines)
-        indexFile.close()
+        with open(self.indexFilePath, 'w') as indexFile:
+            indexFile.writelines(indexFileLines)
         return
 
 def main():
